@@ -1,0 +1,22 @@
+{
+  "name": "decentralized-apps-lab-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "proto:gen": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./generated --ts_proto_opt=outputServices=grpc-js,env=node,esModuleInterop=true ./proto/quiz.proto",
+    "start:server": "ts-node server/index.ts",
+    "start:client": "ts-node client/index.ts"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.6",
+    "long": "^5.2.0",
+    "ts-proto": "^2.6.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^4.9.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

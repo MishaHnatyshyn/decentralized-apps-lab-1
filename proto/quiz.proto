@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package quiz;
+
+service QuizGame {
+  rpc JoinRoom (JoinRequest) returns (stream GameState);
+  rpc CreateRoom (CreateRoomRequest) returns (stream GameState);
+  rpc SubmitAnswer (AnswerRequest) returns (Empty);
+}
+
+message JoinRequest {
+  string username = 1;
+  string roomId = 2;
+}
+
+message CreateRoomRequest {
+  string username = 1;
+}
+
+message Question {
+  string text = 1;
+  repeated string options = 2;
+  int32 correctOption = 3;
+}
+
+message Player {
+  string username = 1;
+  int32 score = 2;
+}
+
+message GameState {
+  enum State {
+    WAITING = 0;
+    IN_PROGRESS = 1;
+    FINISHED = 2;
+  }
+  State state = 1;
+  string roomId = 2;
+  repeated Player players = 3;
+  Question currentQuestion = 4;
+  int32 questionNumber = 5;
+  string message = 6;
+}
+
+message AnswerRequest {
+  string username = 1;
+  string roomId = 2;
+  int32 answer = 3;
+}
+
+message Empty {}
